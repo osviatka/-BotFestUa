@@ -1,1 +1,1 @@
-# -BotFestUa
+# -BotFestUa - reservation helper
