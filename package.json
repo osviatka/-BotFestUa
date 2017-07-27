@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "name": "bot-fest-ua",
-=======
-  "name": "-botfestua",
->>>>>>> origin/Danya
+  "name": "botfestua",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,24 +8,14 @@
   },
   "repository": {
     "type": "git",
-<<<<<<< HEAD
     "url": "git+https://github.com/osviatka/BotFestUa.git"
-=======
-    "url": "git+https://github.com/osviatka/-BotFestUa.git"
->>>>>>> origin/Danya
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-<<<<<<< HEAD
     "url": "https://github.com/osviatka/BotFestUa/issues"
   },
   "homepage": "https://github.com/osviatka/BotFestUa#readme",
-=======
-    "url": "https://github.com/osviatka/-BotFestUa/issues"
-  },
-  "homepage": "https://github.com/osviatka/-BotFestUa#readme",
->>>>>>> origin/Danya
   "dependencies": {
     "node-telegram-bot-api": "^0.27.1"
   }
