@@ -1,0 +1,22 @@
+{
+  "name": "bot-fest-ua",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osviatka/BotFestUa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/osviatka/BotFestUa/issues"
+  },
+  "homepage": "https://github.com/osviatka/BotFestUa#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.27.1"
+  }
+}
