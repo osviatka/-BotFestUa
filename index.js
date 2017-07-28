@@ -1,5 +1,5 @@
 var TelegramBot = require('node-telegram-bot-api'),
-    token = '420737343:AAEFUaIA3R6vnycu7Yd9p76n_qGXOTMKf2g';
+    token = '447593794:AAGzGT6n0i_IDUfxWiME6pWFwLz_srmUh5g';
     // menu = require('./bot/menu.js');
 
 var bot = new TelegramBot(token, {
@@ -34,9 +34,9 @@ function menu() {
     bot.sendMessage(chatId, 'P.S. Якщо хочеш, щоб у нас з тобою все класно склалося, ' +
         'будь ласка, скористуйся пунктами меню ;)', {
         reply_markup: JSON.stringify({
-            keyboard: [
-                ['ІНФО'],
-                ['Забронювати білет']
+            inline_keyboard: [
+                [{ text: 'ІНФО', callback_data: '1' }],
+                [{ text: 'Забронювати білет', callback_data: 'data 2' }]
             ]
         })
     });
