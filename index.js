@@ -6,18 +6,30 @@ var TelegramBot = require('node-telegram-bot-api'),
 
 var chatId;
 var location;
+var userName;
+
+// ---- функция для рандомного числа ----//
+function randomInteger(min, max) {
+    var rand = min - 0.5 + Math.random() * (max - min + 1)
+    rand = Math.round(rand);
+    return rand;
+}
+// ----/ функция для рандомного числа /----//
 
 bot.onText(/\/start/, start());
 
 bot.on('message', function (msg) {
     chatId = msg.from.id;
-    //bot.sendMessage(id, msg.text);
+    userName = msg.from.first_name;
     switch (msg.text) {
         case '/start':
             start();
             break;
         case 'Назад':
             back();
+            break;
+        case 'Меню':
+            menu();
             break;
         case 'ІНФО':
             info();
@@ -27,6 +39,21 @@ bot.on('message', function (msg) {
             break;
         case 'Групи':
             aboutGroups();
+            break;
+        case 'Фото':
+            pictures();
+            break;
+        case 'Океан Ельзи':
+            firstGroup();
+            break;
+        case 'Друга ріка':
+            secondGroup();
+            break;
+        case 'Антитіла':
+            thirdGroup();
+            break;
+        case 'Тартак':
+            fourthGroup();
             break;
         case 'Локації':
             cityLocation();
@@ -41,17 +68,20 @@ bot.on('message', function (msg) {
             kiev();
             break;
     }
+
 });
 
 // Эта функция начинает разговор с пользователем
 function start() {
-    bot.sendMessage(chatId, 'Привіт :) Мене звати BotFestUa. ' +
+    bot.sendMessage(chatId, 'Привіт ' + userName + ' :) Мене звати BotFestUa. ' +
         'Я допоможу тобі забронювати білети на фестиваль, ' +
         'а також трохи розповім про нього.');
     menu();
 }
 
 // Эта функция отправляет пользователю две кнопки главного меню
+
+
 // ------------------  MENU   ---------------//
 function menu() {
     bot.sendMessage(chatId, 'P.S. Якщо хочеш, щоб у нас з тобою все класно склалося, ' +
@@ -102,7 +132,7 @@ function aboutFest() {
             ]
         })
     })
-    location = 'info fest';
+    location = 'info about something';
 }
 // ------------------ / AboutFest/ ---------------//
 
@@ -116,17 +146,79 @@ function aboutGroups() {
         'Тартак\n' +
         'Один в каноє\n' +
         'Фіолет\n' +
-        'Скрябін та ін.',
+        'Скрябін та ін.' +
+        '\n\n\n\nОбери групу із меню, щоб краще ознайомитися з нею.',
         {
             reply_markup: JSON.stringify({
                 keyboard: [
+                    ['Океан Ельзи'],
+                    ['Друга ріка'],
+                    ['Антитіла'],
+                    ['Тартак'],
                     ['Назад'],
                     ['Меню'],
                     ['Забронювати білет']
                 ]
             })
         });
-    location = 'info group';
+    location = 'info about something';
+}
+
+function firstGroup() {
+    bot.sendMessage(chatId, '«Океан Ельзи» — украинская рок-группа. Создана 12 октября' +
+        ' 1994 года во Львове. Лидером и вокалистом группы является Святослав Вакарчук. ' +
+        '\n\nhttps://www.youtube.com/watch?v=1ekDwY0WaP8', {
+        reply_markup: JSON.stringify({
+            keyboard: [
+                ['Назад'],
+                ['Меню'],
+                ['Забронювати білет']
+            ]
+        })
+    });
+    location = 'about group';
+}
+function secondGroup() {
+    bot.sendMessage(chatId, 'Друга Ріка — украинская рок-группа, созданная в начале' +
+        ' 1996 года в городе Житомире, Украина. Википедия' +
+        '\n\nhttps://www.youtube.com/watch?v=UaY8tJkk5Us', {
+        reply_markup: JSON.stringify({
+            keyboard: [
+                ['Назад'],
+                ['Меню'],
+                ['Забронювати білет']
+            ]
+        })
+    });
+    location = 'about group';
+}
+function thirdGroup() {
+    bot.sendMessage(chatId, '«Антитела» — украинская поп-рок-группа из Киева, возникшая' +
+        ' в 2008 году. Фронтменом музыкального коллектива является Тарас Тополя. В репертуаре' +
+        ' группы есть песни на украинском, а также английском и русском языках. ' +
+        '\n\nhttps://www.youtube.com/watch?v=_o-15O7x5qk', {
+        reply_markup: JSON.stringify({
+            keyboard: [
+                ['Назад'],
+                ['Меню'],
+                ['Забронювати білет']
+            ]
+        })
+    });
+    location = 'about group';
+}
+function fourthGroup() {
+    bot.sendMessage(chatId, 'Тартак — украинская музыкальная группа. Выпустила 8 альбомов.' +
+        '\n\nhttps://www.youtube.com/watch?v=VW5oddikCpQ', {
+        reply_markup: JSON.stringify({
+            keyboard: [
+                ['Назад'],
+                ['Меню'],
+                ['Забронювати білет']
+            ]
+        })
+    });
+    location = 'about group';
 }
 // ------------------ / Group / ---------------//
 
@@ -147,13 +239,14 @@ function cityLocation() {
                 ]
             })
         });
-    location = 'info location';
+    location = 'info about everything';
 }
 
 function cherkassy() {
     bot.sendMessage(chatId, '…Fest в м. Черкаси буде тривати 3 дні (25 – 27 серпня) ' +
         'за адресою м.Черкаси, парк Долина Троянд (вулиця Гагаріна, ' +
-        'берег Дніпра (Замковий узвіз).', {
+        'берег Дніпра (Замковий узвіз).' +
+        '\n', {
         reply_markup: JSON.stringify({
             keyboard: [
                 ['Назад'],
@@ -162,8 +255,10 @@ function cherkassy() {
             ]
         })
     });
-    location = 'location cherkassy';
+    bot.sendLocation(chatId, 49.450890, 32.065012);
+    location = 'about city';
 }
+
 function lviv() {
     bot.sendMessage(chatId, 'Fest в м. Львів буде тривати 3 дні (29 – 31 серпня) ' +
         'за адресою  с. Родатичі недалеко від Львова, ' +
@@ -176,7 +271,8 @@ function lviv() {
             ]
         })
     });
-    location = 'location lviv';
+    bot.sendLocation(chatId, 49.450890, 32.065012);
+    location = 'about city';
 }
 
 function kiev() {
@@ -191,9 +287,34 @@ function kiev() {
                 ]
             })
         });
-    location = 'location kiev';
+    bot.sendLocation(chatId, 50.378491, 30.478936);
+    location = 'about city';
 }
+
 // ------------------ / Локации / ---------------//
+
+
+// ------------------  Photo  ---------------//
+function pictures() {
+    bot.sendPhoto(chatId, "http://cms.hostelworld.com/hwblog/wp-content/uploads/sites/2/2015/10/CsudaiS%C3%A1ndor-11.jpg");
+    bot.sendPhoto(chatId, "http://vv-hotel.com/photos/11-calendar/summer_fest_zaxid/zahid_2_900.jpg");
+    bot.sendPhoto(chatId, "https://expresstour.com.ua/upload/image/3333333.jpg");
+    bot.sendPhoto(chatId, "https://v-ticket.com.ua/dynamic/event/gallery/007667_normal.jpg?v=81d9d3eeaaef");
+    bot.sendPhoto(chatId, "http://rok.kiev.ua/wp-content/uploads/2016/08/zaxidfest.png");
+    bot.sendPhoto(chatId, "http://pre-party.com.ua/uploads/2017/Olya_March/Afisha/Zaxidfest/Zahidfest_4.jpg");
+    bot.sendMessage(chatId, "Круті фотографії, на фесті було файно )", {
+        reply_markup: JSON.stringify({
+            keyboard: [
+                ['Назад'],
+                ['Меню'],
+                ['Забронювати білет']
+            ]
+        })
+    });
+
+}
+// ------------------ / Photo/ ---------------//
+
 
 // Эта функция обрабатывает НАЗАД
 // ------------------ BACK ---------------//
@@ -202,24 +323,16 @@ function back() {
         case 'info':
             start();
             break;
-        case 'info fest':
+        case 'info about something':
             info();
             break;
-        case 'info group':
-            info();
-            break;
-        case 'info location':
-            info();
-            break;
-        case 'location cherkassy':
+        case 'about city':
             cityLocation();
             break;
-        case 'location lviv':
-            cityLocation();
-            break;
-        case 'location kiev':
-            cityLocation();
+        case 'about group':
+            aboutGroups();
             break;
     }
 }
 // ------------------ / BACK / ---------------//
+
