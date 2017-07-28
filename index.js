@@ -1,8 +1,6 @@
-var TelegramBot = require('node-telegram-bot-api'),
-    token = '447593794:AAGzGT6n0i_IDUfxWiME6pWFwLz_srmUh5g';
-    // menu = require('./bot/menu.js');
-
-var bot = new TelegramBot(token, {
+const TelegramBot = require('node-telegram-bot-api'),
+    token = '447593794:AAGzGT6n0i_IDUfxWiME6pWFwLz_srmUh5g',
+    bot = new TelegramBot(token, {
     polling: true
 });
 
@@ -23,8 +21,8 @@ bot.on('message', function (msg) {
 
 // Эта функция начинает разговор с пользователем
 function start() {
-    bot.sendMessage(chatId, 'Привіт :) Мене звати BotFestUa');
-    bot.sendMessage(chatId, 'Я допоможу тобі забронювати білети на фестиваль, ' +
+    bot.sendMessage(chatId, 'Привіт :) Мене звати BotFestUa. ' +
+        'Я допоможу тобі забронювати білети на фестиваль, ' +
         'а також трохи розповім про нього.');
     menu();
 }
