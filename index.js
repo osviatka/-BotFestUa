@@ -40,6 +40,8 @@ bot.on('message', function (msg) {
         case 'Київ':
             kiev();
             break;
+
+        //    підключаєм - Забронювати білет
         case 'Забронювати білет':
             reservation();
             break;
@@ -55,6 +57,7 @@ bot.on('message', function (msg) {
         case 'ЧЕРКАСИ':
             CherkassyTickets();
             break;
+        //
     }
 });
 
@@ -235,6 +238,8 @@ function back() {
         case 'location kiev':
             cityLocation();
             break;
+
+         // -- навігація назад - Забронювати білет
         case 'reservation':
             start();
             break;
@@ -247,6 +252,7 @@ function back() {
         case 'reservation threeDays':
             reservation();
             break;
+        //
 
     }
 }
