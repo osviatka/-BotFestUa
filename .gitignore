@@ -3,3 +3,5 @@ css/
 .sass-cache/
 bower_components/
 node_modules/
+db.sqlite
+npm-debug.log
