@@ -107,7 +107,20 @@ function start() {
     bot.sendMessage(chatId, 'Привіт ' + userName + ' :) Мене звати BotFestUa. ' +
         'Я допоможу тобі забронювати білети на фестиваль, ' +
         'а також трохи розповім про нього.');
-    menu();
+    startSecPart();
+}
+
+function startSecPart() {
+    bot.sendMessage(chatId, 'P.S. Якщо хочеш, щоб у нас з тобою все класно склалося, будь ласка, ' +
+        'скористуйся пунктами меню :) ', {
+        reply_markup: JSON.stringify({
+            keyboard: [
+                ['ІНФО'],
+                ['Забронювати білет']
+            ]
+        })
+    });
+    location = 'menu'
 }
 
 // Эта функция отправляет пользователю две кнопки главного меню
@@ -115,8 +128,7 @@ function start() {
 
 // ------------------  MENU   ---------------//
 function menu() {
-    bot.sendMessage(chatId, 'P.S. Якщо хочеш, щоб у нас з тобою все класно склалося, ' +
-        'будь ласка, скористуйся пунктами меню ;)', {
+    bot.sendMessage(chatId, 'Обери, що тебе цікавить з пунктів меню :)',   {
         reply_markup: JSON.stringify({
             keyboard: [
                 ['ІНФО'],
@@ -162,7 +174,7 @@ function aboutFest() {
                 ['Забронювати білет']
             ]
         })
-    })
+    });
     location = 'info about something';
 }
 // ------------------ / AboutFest/ ---------------//
@@ -342,7 +354,7 @@ function pictures() {
             ]
         })
     });
-
+    location = 'photo';
 }
 // ------------------ / Photo/ ---------------//
 
@@ -357,6 +369,12 @@ function back() {
         case 'info about something':
             info();
             break;
+        case 'info about everything':
+            info();
+            break;
+        case 'photo':
+            info();
+            break;
         case 'about city':
             cityLocation();
             break;
@@ -364,10 +382,11 @@ function back() {
             aboutGroups();
             break;
 
+
         //    ----------- Забронювати білет -----------
 
         case 'reservation':
-            start();
+            menu();
             break;
         case 'Some city':
             reservation();
