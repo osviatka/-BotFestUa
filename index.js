@@ -364,7 +364,7 @@ function pictures() {
 function back() {
     switch (location) {
         case 'info':
-            start();
+           menu();
             break;
         case 'info about something':
             info();
@@ -381,7 +381,6 @@ function back() {
         case 'about group':
             aboutGroups();
             break;
-
 
         //    ----------- Забронювати білет -----------
 
