@@ -1,5 +1,5 @@
 {
-  "name": "botfestua",
+  "name": "bot-fest-ua",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/osviatka/BotFestUa#readme",
   "dependencies": {
-    "node-telegram-bot-api": "^0.27.1"
+    "node-telegram-bot-api": "^0.27.1",
+    "sequelize": "^4.4.2",
+    "sqlite3": "^3.1.8"
   }
 }

@@ -67,7 +67,6 @@ bot.on('message', function (msg) {
         case 'Київ':
             kiev();
             break;
-
         //  -------------  Забронювати білет ----
 
         case 'Забронювати білет':
@@ -97,7 +96,6 @@ bot.on('message', function (msg) {
         case 'Відмінити бронь':
             cancelReservation();
             break;
-
     }
 
 });
