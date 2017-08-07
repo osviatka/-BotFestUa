@@ -1,4 +1,4 @@
-var TelegramBot = require('node-telegram-bot-api'),
+const TelegramBot = require('node-telegram-bot-api'),
     token = '447593794:AAGzGT6n0i_IDUfxWiME6pWFwLz_srmUh5g',
     bot = new TelegramBot(token, {
         polling: true
@@ -239,7 +239,7 @@ function cityLocation() {
                 ]
             })
         });
-    location = 'info about everything';
+    location = 'info about something';
 }
 
 function cherkassy() {
@@ -271,7 +271,7 @@ function lviv() {
             ]
         })
     });
-    bot.sendLocation(chatId, 49.450890, 32.065012);
+    bot.sendLocation(chatId, 49.785777, 23.499713);
     location = 'about city';
 }
 
@@ -311,6 +311,8 @@ function pictures() {
             ]
         })
     });
+
+    location = 'info about something';
 
 }
 // ------------------ / Photo/ ---------------//
