@@ -1,8 +1,9 @@
 const TelegramBot = require('node-telegram-bot-api');
+const validator = require("email-validator");
 const moment = require('moment');
 const {Event, Order} = require('./models');
 const token = '420737343:AAEFUaIA3R6vnycu7Yd9p76n_qGXOTMKf2g';
-const ticketsCount = 2;
+const ticketsCount = 10;
 const bot = new TelegramBot(token, {
     polling: true
 });
@@ -69,8 +70,6 @@ bot.on('message', (msg) => {
         case 'Київ':
             kiev(msg);
             break;
-        //  -------------  Забронювати білет ----
-
         case 'Забронювати білет':
             reservation(msg);
             break;
@@ -104,7 +103,6 @@ bot.on('message', (msg) => {
     console.log(state)
 });
 
-// Эта функция начинает разговор с пользователем
 function start(msg) {
     const chatId = msg.from.id;
     bot.sendMessage(chatId, 'Привіт ' + msg.from.first_name + ' :) Мене звати BotFestUa. ' +
@@ -124,10 +122,6 @@ async function startSecPart(chatId) {
     state[chatId].location = 'menu'
 }
 
-// Эта функция отправляет пользователю две кнопки главного меню
-
-
-// ------------------  MENU   ---------------//
 async function menu(msg) {
     const chatId = msg.from.id;
     const ordersCount = await Order.count({where: {telegramId: chatId}});
@@ -138,10 +132,7 @@ async function menu(msg) {
     });
     state[chatId].location = 'menu';
 }
-// ------------------ / MENU /  ---------------//
 
-// Эта функция вызывает меню информации про фест
-// ------------------ INFO  ---------------//
 function info(msg) {
     const chatId = msg.from.id;
     bot.sendMessage(chatId, 'Друже, вибери, будь ласка, що саме тебе цікавить)', {
@@ -164,7 +155,7 @@ async function myOrders(chatId) {
     let orders = await Order.findAll({where: {telegramId: chatId}});
     orders = orders.map((order) => {
         const event = events.find(e => e.id === order.eventId);
-        return `Номер: ${order.id},\nМісто: ${event.city}\nДата: ${moment(event.date).format('LL')}`;
+        return `Номер замовлення: ${order.id},\nМісто: ${event.city}\nДата: ${moment(event.date).format('LL')}`;
     }).join('\n\n');
     bot.sendMessage(chatId, `Твої замовлення: \n${orders}`);
 }
@@ -187,9 +178,7 @@ function aboutFest(msg) {
     });
     state[chatId].location = 'info about something';
 }
-// ------------------ / AboutFest/ ---------------//
 
-// ------------------ Group ---------------//
 function aboutGroups(msg) {
     const chatId = msg.from.id;
     bot.sendMessage(chatId, 'На ФайнаФесті братимуть участь такі українські гурти:\n' +
@@ -201,7 +190,7 @@ function aboutGroups(msg) {
         'Один в каноє\n' +
         'Фіолет\n' +
         'Скрябін та ін.' +
-        '\n\n\n\nОбери групу із меню, щоб краще ознайомитися з нею.',
+        '\n\nОбери групу із меню, щоб краще ознайомитися з нею.',
         {
             reply_markup: JSON.stringify({
                 keyboard: [
@@ -220,8 +209,8 @@ function aboutGroups(msg) {
 
 function firstGroup(msg) {
     const chatId = msg.from.id;
-    bot.sendMessage(chatId, '«Океан Ельзи» — украинская рок-группа. Создана 12 октября' +
-        ' 1994 года во Львове. Лидером и вокалистом группы является Святослав Вакарчук. ' +
+    bot.sendMessage(chatId, '«Океан Ельзи» —  український рок-гурт, створений' +
+        ' 1994 року у Львові. Лідером та вокалістом гурту є Святослав Вакарчук. ' +
         '\n\nhttps://www.youtube.com/watch?v=1ekDwY0WaP8', {
         reply_markup: JSON.stringify({
             keyboard: [
@@ -235,8 +224,8 @@ function firstGroup(msg) {
 }
 function secondGroup(msg) {
     const chatId = msg.from.id;
-    bot.sendMessage(chatId, 'Друга Ріка — украинская рок-группа, созданная в начале' +
-        ' 1996 года в городе Житомире, Украина. Википедия' +
+    bot.sendMessage(chatId, 'Друга Ріка — український рок-гурт, створений на початку' +
+        ' 1996 року в Житомирі. Лідером гурту є Валерій Харчишин.' +
         '\n\nhttps://www.youtube.com/watch?v=UaY8tJkk5Us', {
         reply_markup: JSON.stringify({
             keyboard: [
@@ -250,9 +239,9 @@ function secondGroup(msg) {
 }
 function thirdGroup(msg) {
     const chatId = msg.from.id;
-    bot.sendMessage(chatId, '«Антитела» — украинская поп-рок-группа из Киева, возникшая' +
-        ' в 2008 году. Фронтменом музыкального коллектива является Тарас Тополя. В репертуаре' +
-        ' группы есть песни на украинском, а также английском и русском языках. ' +
+    bot.sendMessage(chatId, '«Антитіла» — український поп-рок-гурт із Києва, що виник у 2008 році. ' +
+        'Фронтменом групи є Тарас Тополя. Репертуар «Антитіл» ' +
+        'складається з пісень українською, а також англійською та російською мовами. ' +
         '\n\nhttps://www.youtube.com/watch?v=_o-15O7x5qk', {
         reply_markup: JSON.stringify({
             keyboard: [
@@ -266,7 +255,7 @@ function thirdGroup(msg) {
 }
 function fourthGroup(msg) {
     const chatId = msg.from.id;
-    bot.sendMessage(chatId, 'Тартак — украинская музыкальная группа. Выпустила 8 альбомов.' +
+    bot.sendMessage(chatId, 'Тартак —  український репкор-гурт, заснований у Луцьку 1996 року.' +
         '\n\nhttps://www.youtube.com/watch?v=VW5oddikCpQ', {
         reply_markup: JSON.stringify({
             keyboard: [
@@ -278,7 +267,6 @@ function fourthGroup(msg) {
     });
     state[chatId].location = 'about group';
 }
-// ------------------ / Group / ---------------//
 
 // ------------------ Локации ---------------//
 function cityLocation(msg) {
@@ -421,10 +409,9 @@ function back(msg) {
 function reservation(msg) {
     const chatId = msg.from.id;
     bot.sendMessage(chatId, 'Друже, ти  на вірному шляху! ' +
-        ' Вартість білету знаходиться в межах 350 - 600 грн, в залежності від кількості днів:\n\n' +
-        '1 день = 350 грн.\n' +
-        '2 дня = 500 грн.\n' +
-        '3 дня = 600 грн.\n\n' +
+        ' Вартість білету знаходиться в межах 250 - 600 грн, в залежності від кількості днів:\n\n' +
+        '1 день = 250 грн.\n' +
+        '3 дні = 600 грн.\n\n' +
         'Наступним кроком вибери потрібне місто:)', {
         reply_markup: JSON.stringify({
             keyboard: [
@@ -496,10 +483,7 @@ function KievTickets(msg) {
 }
 // --- Забронювати по конкретному місту + запит на кількість днів //
 
-
 //----------------бронь за днями + на запит на введення імені-------------//
-
-//--- бронь на 1-й день
 
 async function firstDay(msg) {
     const chatId = msg.from.id;
@@ -508,7 +492,7 @@ async function firstDay(msg) {
     const event = await Event.findOne({where: {city, type: eventType}});
     const count = await Order.count({where: {eventId: event.id}});
     if (count < ticketsCount) {
-        bot.sendMessage(chatId, 'Чудово!  Ти вибрав білет на перший день, вартість білета - 350 грн\n\n' +
+        bot.sendMessage(chatId, 'Чудово!  Ти вибрав білет на перший день, вартість білета - 250 грн\n\n' +
             " введи своє повне ім'я, наприклад, Петренко Петро Петрович 😊", {
             reply_markup: JSON.stringify({
                 keyboard: [
@@ -532,47 +516,97 @@ async function firstDay(msg) {
     }
 }
 
-// // ---- бронь на 2-й дні
-function secondDay(msg) {
+async function secondDay(msg) {
     const chatId = msg.from.id;
     state[chatId].eventType = 'second';
-    bot.sendMessage(chatId, 'Чудово!  Ти вибрав білет на другий день, вартість білета - 350 грн.\n\n' +
-        " Далі введи своє повне ім'я, наприклад, Петренко Петро Петрович 😊", {
-        reply_markup: JSON.stringify({
-            keyboard: [
-                ['Відмінити бронь']
-            ]
-        })
-    });
-    state[chatId].location = 'some day';
+    const {city, eventType} = state[chatId];
+    const event = await Event.findOne({where: {city, type: eventType}});
+    const count = await Order.count({where: {eventId: event.id}});
+    if (count < ticketsCount) {
+        bot.sendMessage(chatId, 'Чудово!  Ти вибрав білет на другий день, вартість білета - 250 грн.\n\n' +
+            " Далі введи своє повне ім'я, наприклад, Петренко Петро Петрович 😊", {
+            reply_markup: JSON.stringify({
+                keyboard: [
+                    ['Відмінити бронь']
+                ]
+            })
+        });
+        state[chatId].location = 'some day';
+    } else {
+        bot.sendMessage(chatId, `Вибач( Але всі ${ticketsCount} квитків уже розпродано( Спробуй інше місто.`, {
+            reply_markup: JSON.stringify({
+                keyboard: [
+                    ['ЧЕРКАСИ'],
+                    ['ЛЬВІВ'],
+                    ['КИЇВ'],
+                    ['Назад']
+                ]
+            })
+        });
+        state[chatId].location = 'reservation';
+    }
 }
-// // ---- бронь на 3-й день
-function thirdDay(msg) {
+
+async function thirdDay(msg) {
     const chatId = msg.from.id;
     state[chatId].eventType = 'third';
-    bot.sendMessage(chatId, 'Чудово!  Ти вибрав білет на третій день, вартість білета - 350 грн.\n\n' +
-        " Далі введи своє повне ім'я, наприклад, Петренко Петро Петрович 😊", {
-        reply_markup: JSON.stringify({
-            keyboard: [
-                ['Відмінити бронь']
-            ]
-        })
-    });
-    state[chatId].location = 'some day';
+    const {city, eventType} = state[chatId];
+    const event = await Event.findOne({where: {city, type: eventType}});
+    const count = await Order.count({where: {eventId: event.id}});
+    if (count < ticketsCount) {
+        bot.sendMessage(chatId, 'Чудово!  Ти вибрав білет на третій день, вартість білета - 250 грн.\n\n' +
+            " Далі введи своє повне ім'я, наприклад, Петренко Петро Петрович 😊", {
+            reply_markup: JSON.stringify({
+                keyboard: [
+                    ['Відмінити бронь']
+                ]
+            })
+        });
+        state[chatId].location = 'some day';
+    } else {
+        bot.sendMessage(chatId, `Вибач( Але всі ${ticketsCount} квитків уже розпродано( Спробуй інше місто.`, {
+            reply_markup: JSON.stringify({
+                keyboard: [
+                    ['ЧЕРКАСИ'],
+                    ['ЛЬВІВ'],
+                    ['КИЇВ'],
+                    ['Назад']
+                ]
+            })
+        });
+        state[chatId].location = 'reservation';
+    }
 }
-// // ---- бронь на 3 дні
-function threeDays(msg) {
+
+async function threeDays(msg) {
     const chatId = msg.from.id;
     state[chatId].eventType = 'all';
-    bot.sendMessage(chatId, 'Чудово!  Ти вибрав білет на 3 дні, вартість білета - 600 грн.\n\n' +
-        " Далі введи своє повне ім'я, наприклад, Петренко Петро Петрович 😊", {
-        reply_markup: JSON.stringify({
-            keyboard: [
-                ['Відмінити бронь']
-            ]
-        })
-    });
-    state[chatId].location = 'some day';
+    const {city, eventType} = state[chatId];
+    const event = await Event.findOne({where: {city, type: eventType}});
+    const count = await Order.count({where: {eventId: event.id}});
+    if (count < ticketsCount) {
+        bot.sendMessage(chatId, 'Чудово!  Ти вибрав білет на 3 дні, вартість білета - 600 грн.\n\n' +
+            " Далі введи своє повне ім'я, наприклад, Петренко Петро Петрович 😊", {
+            reply_markup: JSON.stringify({
+                keyboard: [
+                    ['Відмінити бронь']
+                ]
+            })
+        });
+        state[chatId].location = 'some day';
+    } else {
+        bot.sendMessage(chatId, `Вибач( Але всі ${ticketsCount} квитків уже розпродано( Спробуй інше місто.`, {
+            reply_markup: JSON.stringify({
+                keyboard: [
+                    ['ЧЕРКАСИ'],
+                    ['ЛЬВІВ'],
+                    ['КИЇВ'],
+                    ['Назад']
+                ]
+            })
+        });
+        state[chatId].location = 'reservation';
+    }
 }
 
 function inputData(msg) {
@@ -600,12 +634,22 @@ function inputName(chatId, text) {
 }
 
 async function inputEmail(chatId, text) {
+    if (!validator.validate(text)) {
+        bot.sendMessage(chatId, 'Спробуй ще раз' , {
+            reply_markup: JSON.stringify({
+                keyboard: [
+                    ['Відмінити бронь']
+                ]
+            })
+        });
+        return;
+    }
     state[chatId].email = text;
     const {city, eventType, fullName, email} = state[chatId];
     const event = await Event.findOne({where: {city, type: eventType}});
     const order = await Order.create({eventId: event.id, telegramId: chatId, fullName, email});
     bot.sendMessage(chatId, `Чудово!  Твій білет заброньовано! Номер броні - ${order.id}.` +
-        ' Свій білет ти зможеш отримати у найблищих касах міста. ', {
+    ' Свій білет ти зможеш отримати у найблищих касах міста. ', {
         reply_markup: JSON.stringify({
             keyboard: [
                 ['ІНФО']
