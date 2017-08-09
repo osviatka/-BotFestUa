@@ -649,7 +649,7 @@ async function inputEmail(chatId, text) {
     const event = await Event.findOne({where: {city, type: eventType}});
     const order = await Order.create({eventId: event.id, telegramId: chatId, fullName, email});
     bot.sendMessage(chatId, `Чудово!  Твій білет заброньовано! Номер броні - ${order.id}.` +
-        ' Свій білет ти зможеш отримати у найблищих касах міста. ', {
+    ' Свій білет ти зможеш отримати у найблищих касах міста. ', {
         reply_markup: JSON.stringify({
             keyboard: [
                 ['ІНФО']
