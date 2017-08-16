@@ -1,3 +1,12 @@
+const http = require('http');
+const port =(process.env.PORT || 5000);
+
+http.createServer((request, response) => {
+    response.writeHead(200, {'Content-Type': 'application/json'});
+    response.write(JSON.stringify({name: 'festuabot', ver: '0.0.1'}));
+    response.end();
+}).listen(port);
+
 const TelegramBot = require('node-telegram-bot-api');
 const validator = require("email-validator");
 const moment = require('moment');
