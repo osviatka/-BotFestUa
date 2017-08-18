@@ -7,7 +7,7 @@ const basename = path.basename(module.filename);
 const config = require(__dirname + '/../config.json');
 const db = {};
 
-const sequelize = new Sequelize(config.database);
+const sequelize = new Sequelize(process.env.DATABASE_URL || config.database);
 
 fs.readdirSync(__dirname)
   .filter(file => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
