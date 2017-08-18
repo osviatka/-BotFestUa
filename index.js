@@ -11,7 +11,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const validator = require("email-validator");
 const moment = require('moment');
 const {Event, Order} = require('./models');
-const token = '420737343:AAEFUaIA3R6vnycu7Yd9p76n_qGXOTMKf2g';
+const token = process.env.TELEGRAM_TOKEN || '420737343:AAEFUaIA3R6vnycu7Yd9p76n_qGXOTMKf2g';
 const ticketsCount = 10;
 const bot = new TelegramBot(token, {
     polling: true
