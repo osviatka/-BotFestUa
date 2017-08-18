@@ -1,3 +1,6 @@
 {
-  "database": "sqlite://db.sqlite"
+  "database": "sqlite://db.sqlite",
+  "production": {
+    "use_env_variable": "DATABASE_URL"
+  }
 }
