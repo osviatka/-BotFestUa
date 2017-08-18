@@ -2,6 +2,9 @@
   "name": "bot-fest-ua",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "8.2.1"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
