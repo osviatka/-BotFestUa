@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/osviatka/BotFestUa#readme",
   "dependencies": {
+    "cors": "^2.8.4",
     "email-validator": "^1.1.1",
+    "express": "^4.15.4",
     "moment": "^2.18.1",
     "node-telegram-bot-api": "^0.27.1",
     "pg": "^7.1.2",
