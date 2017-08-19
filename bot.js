@@ -58,16 +58,16 @@ bot.on('message', (msg) => {
         case 'Тартак':
             fourthGroup(msg);
             break;
-        case 'Т':
+        case 'ТНМК':
             fourthGroup(msg);
             break;
-        case 'Тартак':
+        case 'Один в каное':
             fourthGroup(msg);
             break;
-        case 'Тартак':
+        case 'Фіолет':
             fourthGroup(msg);
             break;
-        case 'Тартак':
+        case 'Воплі Відоплясова':
             fourthGroup(msg);
             break;
         case 'Тартак':
