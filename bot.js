@@ -4,16 +4,26 @@ const moment = require('moment');
 const {Event, Order} = require('./models');
 const token = process.env.TELEGRAM_TOKEN || '420737343:AAEFUaIA3R6vnycu7Yd9p76n_qGXOTMKf2g';
 const ticketsCount = 10;
-const bodyParser = require('body-parser');
 const bot = new TelegramBot(token, {
     polling: true
 });
+const state = {};
+const express = require('express');
+const cors = require('cors');
+const asyncMiddleware = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
+
+const app = express();
 const url = 'https://safe-ocean-70918.herokuapp.com/';
 bot.setWebHook(`${url}/bot${token}`);
-const state = {};
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.post(`/bot${token}`, (req, res) => {
+    bot.processUpdate(req.body);
+    res.sendStatus(200);
+});
+
 
 moment.locale('uk');
-
 function randomInteger(min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1);
     rand = Math.round(rand);
@@ -838,3 +848,23 @@ function cancelReservation(msg) {
         })
     });
 }
+
+app.use(cors());
+
+app.get('/', (req, res) => {
+    res.send({name: 'festuabot', ver: '0.0.1'});
+});
+
+app.get('/stats', asyncMiddleware(async (req, res, next) => {
+    res.send({
+        counts: {
+            cherkasy: await Order.count({where: {eventId: {$between: [1, 4]}}}),
+            lviv: await Order.count({where: {eventId: {$between: [5, 8]}}}),
+            kyiv: await Order.count({where: {eventId: {$between: [9, 12]}}})
+        }
+    });
+}));
+
+
+
+app.listen(port, () => console.log(`API server listening on port ${port}`));
