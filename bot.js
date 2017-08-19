@@ -13,7 +13,7 @@ const cors = require('cors');
 const asyncMiddleware = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
 
 const app = express();
-const url = 'https://safe-ocean-70918.herokuapp.com/';
+const url = 'https://safe-ocean-70918.herokuapp.com';
 bot.setWebHook(`${url}/bot${token}`);
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
