@@ -209,17 +209,8 @@ function aboutFest(msg) {
 
 function aboutGroups(msg) {
     const chatId = msg.from.id;
-    bot.sendMessage(chatId, 'На ФайнаФесті братимуть участь такі українські гурти:\n' +
-        'Океан Ельзи\n' +
-        'Друга ріка\n' +
-        'Антитіла\n' +
-        'ТНМК\n' +
-        'Тартак\n' +
-        'Один в каноє\n' +
-        'Фіолет\n' +
-        'Воплі Відоплясова\n' +
-        'BRUTTO' +
-        '\n\nОбери групу із меню, щоб краще ознайомитися з нею.',
+    bot.sendMessage(chatId, 'На FestUa братимуть участь круті українські гурти.\n' +
+        '\nОбери групу із меню, щоб краще ознайомитися з нею.',
         {
             reply_markup: JSON.stringify({
                 keyboard: [
@@ -783,17 +774,27 @@ async function threeDays(msg) {
     }
 }
 
+
 function inputData(msg) {
     const chatId = msg.from.id;
-    switch (state[chatId].location) {
-        case 'some day':
-            inputName(chatId, msg.text);
-            break;
-        case 'order user name':
-            inputEmail(chatId, msg.text);
-            break;
+    if (state[chatId].location == 'some day') {
+        inputName(chatId, msg.text);
+    } else if (state[chatId].location == 'order user name') {
+        inputEmail(chatId, msg.text);
+    } else {
+        const chatId = msg.from.id;
+        bot.sendMessage(chatId, 'Вибач, але я тебе не розумію( Для спілкування зі мною використовуй кнопки із меню. Дякую)', {
+            reply_markup: JSON.stringify({
+                keyboard: [
+                    ['ІНФО'],
+                    ['Забронювати білет'],
+                    ['Мої замовлення']
+                ]
+            })
+        });
     }
 }
+
 
 function inputName(chatId, text) {
     state[chatId].fullName = text;
