@@ -58,6 +58,21 @@ bot.on('message', (msg) => {
         case 'Тартак':
             fourthGroup(msg);
             break;
+        case 'Т':
+            fourthGroup(msg);
+            break;
+        case 'Тартак':
+            fourthGroup(msg);
+            break;
+        case 'Тартак':
+            fourthGroup(msg);
+            break;
+        case 'Тартак':
+            fourthGroup(msg);
+            break;
+        case 'Тартак':
+            fourthGroup(msg);
+            break;
         case 'Локації':
             cityLocation(msg);
             break;
@@ -116,7 +131,7 @@ async function startSecPart(chatId) {
     const keyboard = [['ІНФО'], ['Забронювати білет']];
     if (ordersCount) keyboard.push(['Мої замовлення']);
     bot.sendMessage(chatId, 'P.S. Якщо хочеш, щоб у нас з тобою все класно склалося, будь ласка, ' +
-        'скористуйся пунктами меню :) ', {
+        'скористайся пунктами меню :) ', {
         reply_markup: JSON.stringify({keyboard})
     });
     state[chatId].location = 'menu'
@@ -162,12 +177,12 @@ async function myOrders(chatId) {
 
 function aboutFest(msg) {
     const chatId = msg.from.id;
-    bot.sendMessage(chatId, 'Фестиваль ….Fest традиційно пройде в трьох містах України( Черкаси -25-27 серпня, ' +
-        'Львів - 29-31 серпня, Київ 3-5 вересня)  під лозунгом ………………………….., ' +
+    bot.sendMessage(chatId, 'Фестиваль FestUa традиційно пройде в трьох містах України (Черкаси - 25-27 серпня, ' +
+        'Львів - 29-31 серпня, Київ - 3-5 вересня)  під лозунгом "Музика єднає".' +
         'Тут можна знайти все для комфортного та якісного відпочинку, ' +
         'що робить фестиваль самобутньою і самодостатньою подією, ' +
         'яку наші відвідувачі з нетерпінням чекають цілий рік.' +
-        'Для детальнішої інформації перейдіть на наш сайт http://fainemisto.com.ua/', {
+        'Для детальнішої інформації перейдіть на наш сайт https://yarmolenkod.github.io/fest.ua/', {
         reply_markup: JSON.stringify({
             keyboard: [
                 ['Назад'],
@@ -189,7 +204,8 @@ function aboutGroups(msg) {
         'Тартак\n' +
         'Один в каноє\n' +
         'Фіолет\n' +
-        'Скрябін та ін.' +
+        'Воплі Відоплясова' +
+        'BRUTTO' +
         '\n\nОбери групу із меню, щоб краще ознайомитися з нею.',
         {
             reply_markup: JSON.stringify({
@@ -198,6 +214,11 @@ function aboutGroups(msg) {
                     ['Друга ріка'],
                     ['Антитіла'],
                     ['Тартак'],
+                    ['ТНМК'],
+                    ['Один в каное'],
+                    ['Фіолет'],
+                    ['Воплі Відоплясова'],
+                    ['BRUTTO'],
                     ['Назад'],
                     ['Меню'],
                     ['Забронювати білет']
@@ -214,6 +235,14 @@ function firstGroup(msg) {
         '\n\nhttps://www.youtube.com/watch?v=1ekDwY0WaP8', {
         reply_markup: JSON.stringify({
             keyboard: [
+                ['Друга ріка'],
+                ['Антитіла'],
+                ['Тартак'],
+                ['ТНМК'],
+                ['Один в каное'],
+                ['Фіолет'],
+                ['Воплі Відоплясова'],
+                ['BRUTTO'],
                 ['Назад'],
                 ['Меню'],
                 ['Забронювати білет']
@@ -229,6 +258,13 @@ function secondGroup(msg) {
         '\n\nhttps://www.youtube.com/watch?v=UaY8tJkk5Us', {
         reply_markup: JSON.stringify({
             keyboard: [
+                ['Океан Ельзи'],
+                ['Антитіла'],
+                ['Тартак'],
+                ['ТНМК'],
+                ['Один в каное'],
+                ['Фіолет'],
+                ['Воплі Відоплясова'],
                 ['Назад'],
                 ['Меню'],
                 ['Забронювати білет']
@@ -245,6 +281,14 @@ function thirdGroup(msg) {
         '\n\nhttps://www.youtube.com/watch?v=_o-15O7x5qk', {
         reply_markup: JSON.stringify({
             keyboard: [
+                ['Океан Ельзи'],
+                ['Друга ріка'],
+                ['Тартак'],
+                ['ТНМК'],
+                ['Один в каное'],
+                ['Фіолет'],
+                ['Воплі Відоплясова'],
+                ['BRUTTO'],
                 ['Назад'],
                 ['Меню'],
                 ['Забронювати білет']
@@ -259,6 +303,127 @@ function fourthGroup(msg) {
         '\n\nhttps://www.youtube.com/watch?v=VW5oddikCpQ', {
         reply_markup: JSON.stringify({
             keyboard: [
+                ['Океан Ельзи'],
+                ['Друга ріка'],
+                ['Антитіла'],
+                ['ТНМК'],
+                ['Один в каное'],
+                ['Фіолет'],
+                ['Воплі Відоплясова'],
+                ['BRUTTO'],
+                ['Назад'],
+                ['Меню'],
+                ['Забронювати білет']
+            ]
+        })
+    });
+    state[chatId].location = 'about group';
+}
+
+function fifthGroup(msg) {
+    const chatId = msg.from.id;
+    bot.sendMessage(chatId, 'ТНМК — український гурт, що виконує музику в стилях репкор, хіп-хоп, рок та фанк.' +
+        '\n\nhttps://www.youtube.com/watch?v=E5ZZN243r60', {
+        reply_markup: JSON.stringify({
+            keyboard: [
+                ['Океан Ельзи'],
+                ['Друга ріка'],
+                ['Антитіла'],
+                ['Тартак'],
+                ['Один в каное'],
+                ['Фіолет'],
+                ['Воплі Відоплясова'],
+                ['BRUTTO'],
+                ['Назад'],
+                ['Меню'],
+                ['Забронювати білет']
+            ]
+        })
+    });
+    state[chatId].location = 'about group';
+}
+
+function sixthGroup(msg) {
+    const chatId = msg.from.id;
+    bot.sendMessage(chatId, 'Оди́н в кано́е — український музичний інді-гурт зі Львова.' +
+        '\n\nhttps://www.youtube.com/watch?v=9ea4vNoJpt4', {
+        reply_markup: JSON.stringify({
+            keyboard: [
+                ['Океан Ельзи'],
+                ['Друга ріка'],
+                ['Антитіла'],
+                ['Тартак'],
+                ['ТНМК'],
+                ['Фіолет'],
+                ['Воплі Відоплясова'],
+                ['BRUTTO'],
+                ['Назад'],
+                ['Меню'],
+                ['Забронювати білет']
+            ]
+        })
+    });
+    state[chatId].location = 'about group';
+}
+
+function seventhGroup(msg) {
+    const chatId = msg.from.id;
+    bot.sendMessage(chatId, 'Фіоле́т — музичний гурт з міста Луцька, який виник у 2009-му році.' +
+        '\n\nhttps://www.youtube.com/watch?v=Ef_RwaDb1_Q', {
+        reply_markup: JSON.stringify({
+            keyboard: [
+                ['Океан Ельзи'],
+                ['Друга ріка'],
+                ['Антитіла'],
+                ['Тартак'],
+                ['ТНМК'],
+                ['Один в каное'],
+                ['Воплі Відоплясова'],
+                ['BRUTTO'],
+                ['Назад'],
+                ['Меню'],
+                ['Забронювати білет']
+            ]
+        })
+    });
+    state[chatId].location = 'about group';
+}
+
+function eighthGroup(msg) {
+    const chatId = msg.from.id;
+    bot.sendMessage(chatId, 'Воплі Відоплясова — український рок-гурт, створений у 1986 році. Лідером гурту є вокаліст Олег Скрипка.' +
+        '\n\nhttps://www.youtube.com/watch?v=Y9QCN-3o8q0', {
+        reply_markup: JSON.stringify({
+            keyboard: [
+                ['Океан Ельзи'],
+                ['Друга ріка'],
+                ['Антитіла'],
+                ['Тартак'],
+                ['ТНМК'],
+                ['Один в каное'],
+                ['BRUTTO'],
+                ['Назад'],
+                ['Меню'],
+                ['Забронювати білет']
+            ]
+        })
+    });
+    state[chatId].location = 'about group';
+}
+
+function ninthGroup(msg) {
+    const chatId = msg.from.id;
+    bot.sendMessage(chatId, 'BRUTTO — панк-рок-гурт Сергія Міхалка, заснований ним після припинення існування колективу «Ляпис Трубецкой».' +
+        '\n\nhttps://www.youtube.com/watch?v=DKNWS2eKD4U', {
+        reply_markup: JSON.stringify({
+            keyboard: [
+                ['Океан Ельзи'],
+                ['Друга ріка'],
+                ['Антитіла'],
+                ['Тартак'],
+                ['ТНМК'],
+                ['Один в каное'],
+                ['Воплі Відоплясова'],
                 ['Назад'],
                 ['Меню'],
                 ['Забронювати білет']

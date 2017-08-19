@@ -3,6 +3,7 @@ const cors = require('cors');
 const {Event, Order} = require('./models');
 
 const port = process.env.PORT || 5000;
+
 const app = express();
 
 const asyncMiddleware = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
