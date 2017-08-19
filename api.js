@@ -6,6 +6,7 @@ const port = process.env.PORT || 5000;
 const app = express();
 const bodyParser = require('body-parser');
 const asyncMiddleware = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
+const token = process.env.TELEGRAM_TOKEN || '420737343:AAEFUaIA3R6vnycu7Yd9p76n_qGXOTMKf2g';
 
 app.use(cors());
 app.use(bodyParser.json());
