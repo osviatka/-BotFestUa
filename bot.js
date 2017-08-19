@@ -489,7 +489,7 @@ function lviv(msg) {
             ]
         })
     });
-    bot.sendLocation(chatId, 49.450890, 32.065012);
+    bot.sendLocation(chatId, 49.7857744, 23.4995676);
     state[chatId].location = 'about city';
 }
 
@@ -516,13 +516,7 @@ function kiev(msg) {
 // ------------------  Photo  ---------------//
 function pictures(msg) {
     const chatId = msg.from.id;
-    bot.sendPhoto(chatId, "http://cms.hostelworld.com/hwblog/wp-content/uploads/sites/2/2015/10/CsudaiS%C3%A1ndor-11.jpg");
-    bot.sendPhoto(chatId, "http://vv-hotel.com/photos/11-calendar/summer_fest_zaxid/zahid_2_900.jpg");
-    bot.sendPhoto(chatId, "https://expresstour.com.ua/upload/image/3333333.jpg");
-    bot.sendPhoto(chatId, "https://v-ticket.com.ua/dynamic/event/gallery/007667_normal.jpg?v=81d9d3eeaaef");
-    bot.sendPhoto(chatId, "http://rok.kiev.ua/wp-content/uploads/2016/08/zaxidfest.png");
-    bot.sendPhoto(chatId, "http://pre-party.com.ua/uploads/2017/Olya_March/Afisha/Zaxidfest/Zahidfest_4.jpg");
-    bot.sendMessage(chatId, "Круті фотографії, на фесті було файно )", {
+    bot.sendMessage(chatId, "http://telegra.ph/Fotograf%D1%96i-z-festu-08-19"); {
         reply_markup: JSON.stringify({
             keyboard: [
                 ['Назад'],
@@ -530,7 +524,7 @@ function pictures(msg) {
                 ['Забронювати білет']
             ]
         })
-    });
+    };
     state[chatId].location = 'photo';
 }
 // ------------------ / Photo/ ---------------//
