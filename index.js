@@ -125,6 +125,10 @@ bot.on('message', (msg) => {
         case 'Відмінити бронь':
             cancelReservation(msg);
             break;
+        // case '5':
+        //     console.log(msg.text);
+        //     var order_id = parseInt(msg.text);
+        //     removeReservation(order_id);
         default:
             inputData(msg);
     }
@@ -470,7 +474,6 @@ function cherkassy(msg) {
             keyboard: [
                 ['Назад'],
                 ['Меню'],
-                ['Забронювати білет']
             ]
         })
     });
@@ -487,7 +490,6 @@ function lviv(msg) {
             keyboard: [
                 ['Назад'],
                 ['Меню'],
-                ['Забронювати білет']
             ]
         })
     });
@@ -504,7 +506,6 @@ function kiev(msg) {
                 keyboard: [
                     ['Назад'],
                     ['Меню'],
-                    ['Забронювати білет']
                 ]
             })
         });
@@ -837,6 +838,15 @@ async function inputEmail(chatId, text) {
     state[chatId].location = 'order email';
 }
 
+// async function removeReservation(orderId) {
+//     console.log(orderId);
+//     Order.destroy({
+//         where: {
+//     id: orderId
+//
+//         }
+//     });
+// }
 function cancelReservation(msg) {
     const chatId = msg.from.id;
     bot.sendMessage(chatId, 'Бронювання відмінено! Я розумію - це важливе рішення...' +
