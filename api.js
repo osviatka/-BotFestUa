@@ -1,12 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const {Event, Order} = require('./models');
-const bodyParser = require('body-parser');
 const port = process.env.PORT || 5000;
 const app = express();
-const url = 'https://safe-ocean-70918.herokuapp.com/';
+const bodyParser = require('body-parser');
 const asyncMiddleware = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
-bot.setWebHook(`${url}/bot${token}`);
+
 app.use(cors());
 app.use(bodyParser.json());
 app.get('/', (req, res) => {
