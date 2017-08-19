@@ -4,10 +4,12 @@ const moment = require('moment');
 const {Event, Order} = require('./models');
 const token = process.env.TELEGRAM_TOKEN || '420737343:AAEFUaIA3R6vnycu7Yd9p76n_qGXOTMKf2g';
 const ticketsCount = 10;
+const bodyParser = require('body-parser');
 const bot = new TelegramBot(token, {
     polling: true
 });
-
+const url = 'https://safe-ocean-70918.herokuapp.com/';
+bot.setWebHook(`${url}/bot${token}`);
 const state = {};
 
 moment.locale('uk');
