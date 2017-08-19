@@ -61,19 +61,19 @@ bot.on('message', (msg) => {
             fourthGroup(msg);
             break;
         case 'ТНМК':
-            fourthGroup(msg);
+            fifthGroup(msg);
             break;
         case 'Один в каное':
-            fourthGroup(msg);
+            sixthGroup(msg);
             break;
         case 'Фіолет':
-            fourthGroup(msg);
+            seventhGroup(msg);
             break;
         case 'Воплі Відоплясова':
-            fourthGroup(msg);
+            eighthGroup(msg);
             break;
-        case 'Тартак':
-            fourthGroup(msg);
+        case 'BRUTTO':
+            ninthGroup(msg);
             break;
         case 'Локації':
             cityLocation(msg);
@@ -267,6 +267,7 @@ function secondGroup(msg) {
                 ['Один в каное'],
                 ['Фіолет'],
                 ['Воплі Відоплясова'],
+                ['BRUTTO'],
                 ['Назад'],
                 ['Меню'],
                 ['Забронювати білет']
@@ -403,6 +404,7 @@ function eighthGroup(msg) {
                 ['Тартак'],
                 ['ТНМК'],
                 ['Один в каное'],
+                ['Фіолет'],
                 ['BRUTTO'],
                 ['Назад'],
                 ['Меню'],
