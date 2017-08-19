@@ -7,6 +7,7 @@ const ticketsCount = 10;
 const bot = new TelegramBot(token, {
     polling: true
 });
+const port = process.env.PORT || 5000;
 const state = {};
 const express = require('express');
 const cors = require('cors');
