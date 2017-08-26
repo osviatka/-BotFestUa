@@ -2,7 +2,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const validator = require("email-validator");
 const moment = require('moment');
 const {Event, Order} = require('./models');
-const token = process.env.TELEGRAM_TOKEN || '420737343:AAEFUaIA3R6vnycu7Yd9p76n_qGXOTMKf2g';
+const token = process.env.TELEGRAM_TOKEN;
 const ticketsCount = 10;
 const bot = new TelegramBot(token);
 const port = process.env.PORT || 5000;
@@ -10,7 +10,6 @@ const state = {};
 const express = require('express');
 const cors = require('cors');
 const asyncMiddleware = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
-
 const app = express();
 const url = 'https://safe-ocean-70918.herokuapp.com';
 bot.setWebHook(`${url}/bot${token}`);
@@ -20,6 +19,7 @@ app.post(`/bot${token}`, (req, res) => {
     bot.processUpdate(req.body);
     res.sendStatus(200);
 });
+
 
 
 moment.locale('uk');
