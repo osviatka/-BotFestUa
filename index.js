@@ -1,12 +1,12 @@
 const TelegramBot = require('node-telegram-bot-api');
+const token = process.env.TELEGRAM_TOKEN;
+const bot = new TelegramBot(token);
 const validator = require("email-validator");
 const moment = require('moment');
 const {Event, Order} = require('./models');
-const token = process.env.TELEGRAM_TOKEN;
 const ticketsCount = 10;
-const bot = new TelegramBot(token);
+
 const port = process.env.PORT || 5000;
-const state = {};
 const express = require('express');
 const cors = require('cors');
 const asyncMiddleware = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
@@ -20,9 +20,9 @@ app.post(`/bot${token}`, (req, res) => {
     res.sendStatus(200);
 });
 
-
-
+const state = {};
 moment.locale('uk');
+
 function randomInteger(min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1);
     rand = Math.round(rand);
